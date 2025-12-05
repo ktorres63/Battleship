@@ -1,20 +1,30 @@
 import { Ship } from "../models/Ship.js";
 
-export type CellContent = Ship | null;
+type ShipPlacement = Ship | null;
+type AttackStatus = "hit" | "missed" | null;
 interface ICoordinates {
   x: number;
   y: number;
 }
 
 export class Gameboard {
-  grid: CellContent[][];
+  shipPlacement: ShipPlacement[][];
+  attackStatus: AttackStatus[][];
+  ships: Ship[] = [];
   size: number;
+  missedAttacks: ICoordinates[] = [];
+
   constructor(size: number) {
     if (size <= 0) {
       throw new Error("GameBoard size must be positive.");
     }
     this.size = size;
-    this.grid = Array.from({ length: size }, () => Array(size).fill(null));
+    this.shipPlacement = Array.from({ length: size }, () =>
+      Array(size).fill(null)
+    );
+    this.attackStatus = Array.from({ length: size }, () =>
+      Array(size).fill(null)
+    );
   }
 
   placeShip(ship: Ship, coordinates: ICoordinates, orientation: string) {
@@ -32,13 +42,47 @@ export class Gameboard {
     }
     if (orientation === "horizontal") {
       for (let i = 0; i < shipLenght; i++) {
-        this.grid[y]![x + i] = ship;
+        this.shipPlacement[y]![x + i] = ship;
       }
     }
     if (orientation === "vertical") {
       for (let i = 0; i < shipLenght; i++) {
-        this.grid[y + i]![x] = ship;
+        this.shipPlacement[y + i]![x] = ship;
       }
     }
+
+    //Add the ship to Ships Array
+    if (!this.ships.includes(ship)) {
+      this.ships.push(ship);
+    }
+  }
+  receiveAttack(coordinates: ICoordinates): string {
+    const cell = this.shipPlacement[coordinates.y]![coordinates.x];
+    const { x, y } = coordinates;
+
+    if (this.attackStatus[coordinates.y]![coordinates.x] !== null) {
+      throw new Error("Spot already attacked");
+    }
+
+    if (cell == null) {
+      this.missedAttacks.push(coordinates);
+      this.attackStatus[y]![x] = "missed";
+      return "miss";
+    }
+    if (typeof cell.hit === "function") {
+      cell.hit();
+      this.attackStatus[y]![x] = "hit";
+
+      return "hit";
+    }
+
+    throw new Error("invalid cell state");
+  }
+  allShipsSunk(): boolean {
+
+    if(this.ships.length == 0){
+      return false
+    }
+    return this.ships.every(ship => ship.isSunk());
   }
 }

@@ -16,13 +16,13 @@ describe("Gameboard", () => {
   });
 
   it("should create a gameboard with 10x10 grid", () => {
-    expect(gameboard.grid.length).toBe(10);
-    gameboard.grid.forEach(row => {
+    expect(gameboard.shipPlacement.length).toBe(10);
+    gameboard.shipPlacement.forEach(row => {
       expect(row).toBeDefined();
       expect(row.length).toBe(10)
     })
     
-    expect(gameboard.grid[5]![5]!).toBeNull()
+    expect(gameboard.shipPlacement[5]![5]!).toBeNull()
   });
 
   it("should be able to place a Ship at specific coordinates(horizontal)", () => {
@@ -30,21 +30,21 @@ describe("Gameboard", () => {
 
     gameboard.placeShip(ship, { x: 0, y: 0 }, "horizontal");
 
-    expect(gameboard.grid[0]![0]).toBe(ship);
-    expect(gameboard.grid[0]![1]).toBe(ship);
-    expect(gameboard.grid[0]![2]).toBe(ship);
-    expect(gameboard.grid[0]![3]).toBeNull();
+    expect(gameboard.shipPlacement[0]![0]).toBe(ship);
+    expect(gameboard.shipPlacement[0]![1]).toBe(ship);
+    expect(gameboard.shipPlacement[0]![2]).toBe(ship);
+    expect(gameboard.shipPlacement[0]![3]).toBeNull();
   });
   it("should be able to place a Ship at specific coordinates(vertical)", () => {
     const ship = new Ship(4);
 
     gameboard.placeShip(ship, { x: 5, y: 5 }, "vertical");
 
-    expect(gameboard.grid[5]![5]).toBe(ship);
-    expect(gameboard.grid[6]![5]).toBe(ship);
-    expect(gameboard.grid[7]![5]).toBe(ship);
-    expect(gameboard.grid[8]![5]).toBe(ship);
-    expect(gameboard.grid[9]![5]).toBeNull();
+    expect(gameboard.shipPlacement[5]![5]).toBe(ship);
+    expect(gameboard.shipPlacement[6]![5]).toBe(ship);
+    expect(gameboard.shipPlacement[7]![5]).toBe(ship);
+    expect(gameboard.shipPlacement[8]![5]).toBe(ship);
+    expect(gameboard.shipPlacement[9]![5]).toBeNull();
   });
   it("should prevent placing ships that go out of bounds", () => {
     const ship = new Ship(3);
@@ -61,7 +61,7 @@ describe("Gameboard", () => {
     const shipMockInstance = ShipMock(3);
     gameboard.placeShip(
       shipMockInstance as unknown as Ship,
-      { x: 1, y: 1 },
+      { x: 2, y: 1 },
       "horizontal"
     );
     gameboard.receiveAttack({ x: 2, y: 1 });
@@ -85,7 +85,7 @@ describe("Gameboard", () => {
   });
 
   it("should throw an error or handle attacks on already attacked spots", () => {
-    const coords = { x: 5, y: 5 };
+    const coords = { x: 3, y: 5 };
     gameboard.receiveAttack(coords);
     expect(() => gameboard.receiveAttack(coords)).toThrow(
       "Spot already attacked"
@@ -99,7 +99,7 @@ describe("Gameboard", () => {
     const ship2 = new Ship(2);
 
     gameboard.placeShip(ship1, { x: 0, y: 0 }, "horizontal");
-    gameboard.placeShip(ship1, { x: 5, y: 5 }, "horizontal");
+    gameboard.placeShip(ship2, { x: 5, y: 5 }, "horizontal");
 
     expect(gameboard.allShipsSunk()).toBe(false);
     ship1.hit();
@@ -111,7 +111,7 @@ describe("Gameboard", () => {
     const ship2 = new Ship(2);
 
     gameboard.placeShip(ship1, { x: 0, y: 0 }, "horizontal");
-    gameboard.placeShip(ship1, { x: 5, y: 5 }, "horizontal");
+    gameboard.placeShip(ship2, { x: 5, y: 5 }, "horizontal");
 
     expect(gameboard.allShipsSunk()).toBe(false);
     ship1.hit();
