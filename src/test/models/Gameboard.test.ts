@@ -33,7 +33,7 @@ describe("Gameboard", () => {
     expect(gameboard.shipPlacement[0]![0]).toBe(ship);
     expect(gameboard.shipPlacement[0]![1]).toBe(ship);
     expect(gameboard.shipPlacement[0]![2]).toBe(ship);
-    expect(gameboard.shipPlacement[0]![3]).toBeNull();
+    expect(gameboard.shipPlacement[0]![3]).toBeNull(); 
   });
   it("should be able to place a Ship at specific coordinates(vertical)", () => {
     const ship = new Ship(4);
@@ -73,7 +73,7 @@ describe("Gameboard", () => {
     gameboard.receiveAttack(coordMiss);
     expect(gameboard.missedAttacks).toContainEqual(coordMiss);
   });
-  it("should return 'miss' for a missed attack or 'success' for a successful attack", () => {
+  it("should return 'miss' for a missed attack or 'hit' for a successful attack", () => {
     const coordMiss = { x: 0, y: 0 };
     const coordSucc = { x: 3, y: 3 };
 
