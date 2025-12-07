@@ -1,6 +1,9 @@
 import { Player } from "../models/Player.js";
-import { Ship } from "../models/Ship.js";
-
+import { Ship, } from "../models/Ship.js";
+interface ICoordinates {
+  x: number;
+  y: number;
+}
 export class Game {
   player: Player;
   computer: Player;
@@ -22,4 +25,13 @@ export class Game {
   
   }
   start(){}
+  playerAttack(coord:ICoordinates){
+
+  }
+  computerAttack(){
+    
+  }
+  isHumanWinner(){
+    
+  }
 }
