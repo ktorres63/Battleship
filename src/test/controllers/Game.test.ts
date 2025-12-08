@@ -16,9 +16,9 @@ describe("Game", () => {
 
   beforeEach(() => {
     game = new Game();
+    game.start();
   });
   it("should place computer ships on start", () => {
-    game.start();
     const computerBoard = game.computer.board;
 
     expect(computerBoard.ships.length).toBeGreaterThan(0);
@@ -30,8 +30,6 @@ describe("Game", () => {
   });
 
   it("should allow player to hit a computer ship", () => {
-    game.start();
-
     const computerBoard = game.computer.board;
     const ship = new Ship(2);
     computerBoard.placeShip(ship, { x: 1, y: 1 }, "horizontal");
@@ -44,8 +42,6 @@ describe("Game", () => {
     expect(hitSpy).toHaveBeenCalled();
   });
   it("should trigger computer attack after player attack", () => {
-    game.start();
-
     const playerBoard = game.player.board;
     const computerAttackSpy = vi.spyOn(game, "computerAttack");
     const attackCoord = { x: 0, y: 0 };
@@ -53,37 +49,33 @@ describe("Game", () => {
     game.playerAttack(attackCoord);
     expect(computerAttackSpy).toHaveBeenCalledTimes(1);
 
-    const totalAttacks = playerBoard.attackStatus.flat().filter((c) => {
-      c !== null;
-    }).length;
+    const totalAttacks = playerBoard.attackStatus
+      .flat()
+      .filter((c) => c !== null).length;
 
     expect(totalAttacks).toBe(1);
   });
 
   it("should detect when human wins", () => {
-    game.start();
-
     const computerBoard = game.computer.board;
+
     expect(game.isHumanWinner()).toBe(false);
 
-    for (const ship of computerBoard.ships) {
-      let hitsNeeded = ship.length;
-      const shipCells = [];
+    const shipCells = [];
 
-      for (let y = 0; y < computerBoard.size; y++) {
-        for (let x = 0; x < computerBoard.size; x++) {
-          if(computerBoard.shipPlacement[y]![x] == ship){
-            shipCells.push({x,y})
-          }
+    for (let y = 0; y < computerBoard.size; y++) {
+      for (let x = 0; x < computerBoard.size; x++) {
+        if (computerBoard.shipPlacement[y]![x] != null) {
+          shipCells.push({ x, y });
         }
       }
-
-      shipCells.forEach((cell) => {
-        game.playerAttack(cell)
-      })
-
-      expect(computerBoard.allShipsSunk()).toBe(true);
-      expect(game.isHumanWinner()).toBe(true)
     }
+
+    shipCells.forEach((cell) => {
+      game.playerAttack(cell);
+    });
+
+    expect(computerBoard.allShipsSunk()).toBe(true);
+    expect(game.isHumanWinner()).toBe(true);
   });
 });
