@@ -6,7 +6,6 @@
     <title>Battleship</title>
   </head>
   <body class="flex flex-col min-h-screen bg-gray-900 text-white pt-5">
-    <!-- Header con título grande -->
     <header class="py-8 text-center relative">
       <!-- Separador grande exterior -->
       <div
@@ -45,8 +44,14 @@
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-3xl font-bold text-blue-400">Place your Ships</h2>
         </div>
+        <div class="flex-1 " id="placement-board">
 
-        <div id="placement-board"></div>
+          <div
+            id="player-board"
+            class="grid grid-cols-10 gap-1 bg-blue-900/30 p-4 rounded-xl border-2 border-blue-500 shadow-lg"
+          ></div>
+        </div>
+
         <div id="ships-container">
           <!-- Barcos draggable -->
           <img src="./src/ui/assets/sprites/ships/Carrier.png" class="ship" data-size="5" />

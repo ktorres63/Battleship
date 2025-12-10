@@ -5,7 +5,7 @@ export function renderBoards(game: Game) {
   renderComputerBoard(game.computer.board);
 }
 
-function renderPlayerBoard(board:Gameboard) {
+export function renderPlayerBoard(board:Gameboard) {
   const container = document.getElementById("player-board");
   container!.innerHTML = "";
 

@@ -21,11 +21,11 @@ export class Game {
   }
   private staticPlaceComputerShips() {
     const ships = [
-      new Ship(5), // portaaviones
-      new Ship(4), // acorazado
-      new Ship(3), // crucero
-      new Ship(3), // submarino
-      new Ship(2), // destructor
+      new Ship(5, "Carrier"), // Carrier
+      new Ship(4, "Battleship"), // Battleship
+      new Ship(3, "Cruiser"), // Cruiser
+      new Ship(3, "Submarine"), // Submarine
+      new Ship(2, "Destroyer"), // Destroyer
     ];
 
     this.computer.board.placeShip(ships[0]!, { x: 0, y: 0 }, "horizontal"); // (0,0)-(4,0)
