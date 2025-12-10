@@ -2,7 +2,7 @@ import { describe, expect, it, beforeEach, vi } from "vitest";
 import { Gameboard } from "../../models/Gameboard.js";
 import { Ship } from "../../models/Ship.js";
 import { Player } from "../../models/Player.js";
-import { Game } from "../../controllers/Game.js";
+import { Game } from "../../controllers/GameController.js";
 
 /*
 should place computer ships on start

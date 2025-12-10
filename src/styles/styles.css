@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@theme {
+  --color-primary: #3b82f6;
+  --font-rajdhani: "Rajdhani", sans-serif;
+  /* tus personalizaciones */
+}
+
+/* .clase1 {
+  @apply bg-amber-50
+  @apply border-amber-950;
+} */
