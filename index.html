@@ -6,61 +6,110 @@
     <title>Battleship</title>
   </head>
   <body class="flex flex-col min-h-screen bg-gray-900 text-white pt-5">
-    <header class="py-8 text-center relative">
-      <!-- Separador grande exterior -->
-      <div
-        class="absolute inset-0 flex items-center justify-center pointer-events-none"
-      >
-        <div
-          class="h-40 w-full max-w-4xl mx-auto border-t-4 border-b-4 border-white/20 rounded-full"
-        ></div>
-      </div>
-
-      <!-- Separador mediano interior -->
-      <div
-        class="absolute inset-0 flex items-center justify-center pointer-events-none"
-      >
-        <div
-          class="h-28 w-full max-w-3xl mx-auto border-t-2 border-b-2 border-white/30 rounded-full"
-        ></div>
-      </div>
-
+    <header class="py-8 flex justify-center">
       <!-- Título principal con efectos -->
-      <div class="relative z-10">
-        <h1
-          class="font-rajdhani text-5xl md:text-6xl lg:text-7xl font-bold tracking-wider bg-linear-to-r from-blue-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg animate-pulse"
-        >
-          BATTLESHIP
-        </h1>
-      </div>
+      <h1
+        class="font-rajdhani text-5xl md:text-6xl lg:text-7xl font-bold tracking-wider bg-linear-to-r from-blue-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg animate-pulse"
+      >
+        BATTLESHIP
+      </h1>
     </header>
 
-    <main class="flex-1 flex flex-col items-center justify-center px-4">
+    <main
+      id="app"
+      class="flex-1 flex flex-col items-center justify-center px-6"
+    >
       <!--View 1:  Ships placement -->
       <section
         id="placement-view"
-        class="flex flex-col md:flex-row gap-10 p-8 max-w-6xl w-full"
+        class="flex flex-col gap-6 w-full max-w-6xl items-center"
       >
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-3xl font-bold text-blue-400">Place your Ships</h2>
-        </div>
-        <div class="flex-1 " id="placement-board">
+        <h2 class="text-2xl sm:text-3xl font-bold text-blue-400">
+          Place your Ships
+        </h2>
 
+        <!-- Botones de orientación -->
+        <div class="flex gap-4 justify-around">
+          <button
+            id="axis-x"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          >
+            X axis
+          </button>
+          <button
+            id="axis-y"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          >
+            Y axis
+          </button>
+        </div>
+
+        <!-- Contenedor principal -->
+        <div
+          id="placement-board"
+          class="flex flex-col md:flex-row items-center justify-between w-full"
+        >
+          <!-- Ships container -->
           <div
-            id="player-board"
-            class="grid grid-cols-10 gap-1 bg-blue-900/30 p-4 rounded-xl border-2 border-blue-500 shadow-lg"
+            id="ships-container"
+            class="flex flex-wrap justify-center flex-row md:flex-col gap-2 overflow-x-auto p-2"
+          >
+            <div
+              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              id="ship-carrier"
+              data-ship="carrier"
+              data-length="5"
+            >
+              <span>Carrier(5)</span>
+            </div>
+            <div
+              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              id="ship-battleship"
+              data-ship="battleship"
+              data-length="4"
+            >
+              <span>Battleship(4)</span>
+            </div>
+            <div
+              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              id="ship-cruiser"
+              data-ship="cruiser"
+              data-length="3"
+            >
+              <span>Cruiser(3)</span>
+            </div>
+            <div
+              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              id="ship-submarine"
+              data-ship="submarine"
+              data-length="3"
+            >
+              <span>Submarine(3)</span>
+            </div>
+            <div
+              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              id="ship-destroyer"
+              data-ship="destroyer"
+              data-length="2"
+            >
+              <span>Destroyer(2)</span>
+            </div>
+          </div>
+
+          <!-- Board -->
+          <div
+            id="player-draggable-board"
+            class="grid grid-cols-10 gap-1 bg-blue-900/30 p-3 sm:p-4 rounded-xl border-2 border-blue-500 shadow-lg"
           ></div>
         </div>
 
-        <div id="ships-container">
-          <!-- Barcos draggable -->
-          <img src="./src/ui/assets/sprites/ships/Carrier.png" class="ship" data-size="5" />
-          <img src="./src/ui/assets/sprites/ships/Battleship.png" class="ship" data-size="4" />
-          <img src="./src/ui/assets/sprites/ships/Cruiser.png" class="ship" data-size="3" />
-          <img src="./src/ui/assets/sprites/ships/SubMarine.png" class="ship" data-size="3" />
-          <img src="./src/ui/assets/sprites/ships/Destroyer.png" class="ship" data-size="2" />
-        </div>
-        <button id="confirm-placement">Listo</button>
+        <!-- Botón final -->
+        <button
+          id="confirm-placement"
+          class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg w-full sm:w-auto mx-auto"
+        >
+          Listo
+        </button>
       </section>
 
       <!--View 2:  Battle -->
@@ -101,7 +150,7 @@
 
     <!-- Action Buttons -->
     <div class="flex justify-center space-x-4">
-      <button
+      <button id="new-game"
         class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold transition duration-300 transform hover:scale-105"
       >
         New Game
@@ -110,11 +159,6 @@
         class="px-6 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg font-bold transition duration-300 transform hover:scale-105"
       >
         Restart Game
-      </button>
-      <button
-        class="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg font-bold transition duration-300"
-      >
-        Instructions
       </button>
     </div>
 
@@ -153,6 +197,6 @@
       </div>
     </footer>
 
-    <script type="module" src="./src/ui/main.ts"></script>
+    <script type="module" src="./src/main.ts"></script>
   </body>
 </html>

@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+@theme {
+  --font-rajdhani: "Rajdhani", sans-serif;
+}
+
+.cell {
+  @apply w-[clamp(20px,4vw,40px)];
+  @apply h-[clamp(20px,4vw,40px)];
+  @apply bg-blue-300;
+  @apply border;
+  @apply border-gray-500;
+}
+
+/*
+ w-10 h-10 border border-gray-500 flex items-center justify-center bg-blue-300*/

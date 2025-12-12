@@ -1,44 +1,36 @@
 import { Game } from "../controllers/GameController.js";
 import type { Gameboard } from "../models/Gameboard.js";
-export function renderBoards(game: Game) {
-  renderPlayerBoard(game.player.board);
-  renderComputerBoard(game.computer.board);
-}
 
-export function renderPlayerBoard(board:Gameboard) {
+
+export function renderPlayerBoard(board: Gameboard) {
   const container = document.getElementById("player-board");
   container!.innerHTML = "";
 
   for (let y = 0; y < board.size; y++) {
     for (let x = 0; x < board.size; x++) {
       const cellDiv = document.createElement("div");
-      cellDiv.className =
-        "cell w-10 h-10 border border-gray-500 flex items-center justify-center bg-blue-300";
+      cellDiv.className = "cell";
 
       const cell = board.shipPlacement[y]![x];
-      const attack = board.attackStatus[y]![x]
+      const attack = board.attackStatus[y]![x];
 
       //ships
-      if(cell !== null){
-        cellDiv.classList.add("bg-gray-700")
+      if (cell !== null) {
+        cellDiv.classList.add("bg-gray-700");
       }
 
       //show hit or miss
-      if(attack === "hit"){
+      if (attack === "hit") {
         cellDiv.classList.add("bg-red-500");
-        
+      } else if (attack == "missed") {
+        cellDiv.classList.add("bg-white");
       }
-      else if(attack =="missed"){
-        cellDiv.classList.add("bg-white")
-      }
-      container?.appendChild(cellDiv)
-
-
+      container?.appendChild(cellDiv);
     }
   }
 }
 
-function renderComputerBoard(board:Gameboard) {
+function renderComputerBoard(board: Gameboard) {
   const container = document.getElementById("computer-board");
   container!.innerHTML = "";
 
@@ -58,7 +50,6 @@ function renderComputerBoard(board:Gameboard) {
       if (attack === "hit") {
         cellDiv.classList.add("bg-red-500");
         cellDiv.innerHTML = `<img src="./src/ui/assets/sprites/explosion.gif" class="w-full h-full object-cover" />`;
-        
       } else if (attack === "missed") {
         cellDiv.classList.add("bg-white");
       }
@@ -67,3 +58,7 @@ function renderComputerBoard(board:Gameboard) {
     }
   }
 }
+// export function renderBoards(game: Game) {
+//   renderPlayerBoard(game.player.board);
+//   renderComputerBoard(game.computer.board);
+// }
