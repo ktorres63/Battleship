@@ -7,10 +7,71 @@
 .cell {
   @apply w-[clamp(20px,4vw,40px)];
   @apply h-[clamp(20px,4vw,40px)];
-  @apply bg-blue-300;
-  @apply border;
-  @apply border-gray-500;
+  @apply bg-blue-800 border border-gray-500 border-blue-600;
+  @apply hover:bg-blue-700 cursor-pointer;
+  @apply transition-all duration-200;
+  @apply rounded-sm;
+  @apply flex items-center justify-center;
+  @apply text-xs sm:text-sm md:text-base;
 }
 
-/*
- w-10 h-10 border border-gray-500 flex items-center justify-center bg-blue-300*/
+/* Celda con barco colocado */
+.cell.bg-amber-600 {
+  @apply bg-amber-600 border-amber-700;
+}
+
+/* Estados de hover durante drag */
+.cell.bg-green-500 {
+  @apply bg-green-500;
+}
+
+.cell.bg-red-500 {
+  @apply bg-red-500;
+}
+
+/* Barcos arrastrables */
+.draggable-ship {
+  @apply select-none;
+  @apply transition-opacity duration-200;
+}
+
+.draggable-ship:hover {
+  @apply bg-amber-600;
+}
+
+/* Botones de orientación activos */
+#axis-x,
+#axis-y {
+  @apply transition-all duration-200;
+}
+
+/* Animación para celdas atacadas */
+.cell.hit {
+  @apply bg-red-600 border-red-700;
+  animation: hitPulse 0.5s ease-in-out;
+}
+
+.cell.missed {
+  @apply bg-gray-600 border-gray-700;
+  animation: missedPulse 0.5s ease-in-out;
+}
+
+@keyframes hitPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes missedPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+}

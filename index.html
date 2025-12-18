@@ -55,42 +55,47 @@
             class="flex flex-wrap justify-center flex-row md:flex-col gap-2 overflow-x-auto p-2"
           >
             <div
-              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
               id="ship-carrier"
               data-ship="carrier"
               data-length="5"
+              data-orientation="horizontal"
             >
               <span>Carrier(5)</span>
             </div>
             <div
-              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
               id="ship-battleship"
               data-ship="battleship"
               data-length="4"
+              data-orientation="horizontal"
             >
               <span>Battleship(4)</span>
             </div>
             <div
-              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
               id="ship-cruiser"
               data-ship="cruiser"
               data-length="3"
+              data-orientation="horizontal"
             >
               <span>Cruiser(3)</span>
             </div>
             <div
-              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
               id="ship-submarine"
               data-ship="submarine"
               data-length="3"
+              data-orientation="horizontal"
             >
               <span>Submarine(3)</span>
             </div>
             <div
-              class="bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
               id="ship-destroyer"
               data-ship="destroyer"
               data-length="2"
+              data-orientation="horizontal"
             >
               <span>Destroyer(2)</span>
             </div>
@@ -150,7 +155,8 @@
 
     <!-- Action Buttons -->
     <div class="flex justify-center space-x-4">
-      <button id="new-game"
+      <button
+        id="new-game"
         class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold transition duration-300 transform hover:scale-105"
       >
         New Game
