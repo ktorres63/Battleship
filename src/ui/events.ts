@@ -171,14 +171,14 @@ function checkIfCanPlace(
   coords: Coord[],
   boardEl: HTMLElement
 ): boolean {
-  // Verificar límites del tablero
+  // Verify limits on board
   for (const coord of coords) {
     if (coord.x < 0 || coord.x >= 10 || coord.y < 0 || coord.y >= 10) {
       return false;
     }
   }
 
-  // Verificar que no haya otro barco en esas posiciones
+  // Verify collisions
   for (const coord of coords) {
     const cell = boardEl.querySelector(
       `[data-y="${coord.y}"][data-x="${coord.x}"]`
@@ -233,25 +233,18 @@ function placeShipOnBoard(
   const length = coords.length;
   const ship = new Ship(length, shipName);
 
-  // Colocar en el modelo del juego - ESTO ES LO IMPORTANTE
   try {
     game.player.board.placeShip(ship, coords[0]!, orientation);
-    
-    // Si llegamos aquí, la colocación fue exitosa
-    // Pintar en el tablero
     paintPlacedShip(boardEl, coords);
 
-    // Guardar referencia
     placedShips.set(shipName, { ship, coords, orientation, element: shipEl });
 
-    // Remover del contenedor de barcos disponibles
     shipEl.remove();
 
-    console.log("Barco colocado:", shipName);
-    console.log("Barcos en el tablero del jugador:", game.player.board.ships.length);
+    console.log("Ship placed:", shipName);
   } catch (error) {
-    console.error("Error al colocar el barco:", error);
-    alert("No se pudo colocar el barco en esa posición");
+    console.error("Error:", error);
+    alert("Ship cannot be placed here");
   }
 }
 
@@ -262,14 +255,12 @@ function removeShipAt(
   boardEl: HTMLElement,
   shipsEl: HTMLElement
 ) {
-  // Buscar qué barco está en esa posición
   for (const [shipName, data] of placedShips.entries()) {
     const isInCoords = data.coords.some(
       (coord) => coord.x === x && coord.y === y
     );
 
     if (isInCoords) {
-      // Limpiar las celdas del tablero visual
       data.coords.forEach((coord) => {
         const cell = boardEl.querySelector(
           `[data-y="${coord.y}"][data-x="${coord.x}"]`

@@ -24,10 +24,14 @@
         id="placement-view"
         class="flex flex-col gap-6 w-full max-w-6xl items-center"
       >
-        <h2 class="text-2xl sm:text-3xl font-bold text-blue-400">
-          Place your Ships
-        </h2>
-
+        <div class="flex items-center flex-col gap-2">
+          <h2 class="text-2xl sm:text-3xl font-bold text-blue-400">
+            Place your Ships
+          </h2>
+          <span
+            >Drag your ships onto the grid. Right-click to remove them.</span
+          >
+        </div>
         <!-- Botones de orientación -->
         <div class="flex gap-4 justify-around">
           <button
@@ -44,60 +48,87 @@
           </button>
         </div>
 
-        <!-- Contenedor principal -->
         <div
           id="placement-board"
-          class="flex flex-col md:flex-row items-center justify-between w-full"
+          class="flex flex-col items-center justify-around w-full gap-5"
         >
           <!-- Ships container -->
           <div
             id="ships-container"
-            class="flex flex-wrap justify-center flex-row md:flex-col gap-2 overflow-x-auto p-2"
+            class="flex flex-wrap justify-center flex-row gap-2 p-2"
           >
             <div
-              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship ship cursor-move flex flex-col items-center justify-center w-32 h-16"
               id="ship-carrier"
               data-ship="carrier"
               data-length="5"
               data-orientation="horizontal"
             >
-              <span>Carrier(5)</span>
+              <img
+                src="/sprites/ships/Carrier.png"
+                alt="Carrier"
+                class="h-full w-full object-contain pointer-events-none select-none"
+              />
+              <span class="text-xs">Carrier(5)</span>
             </div>
+
             <div
-              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship ship cursor-move flex flex-col items-center justify-center w-32 h-16"
               id="ship-battleship"
               data-ship="battleship"
               data-length="4"
               data-orientation="horizontal"
             >
-              <span>Battleship(4)</span>
+              <img
+                src="/sprites/ships/Battleship.png"
+                alt="Battleship"
+                class="h-full w-full object-contain pointer-events-none select-none"
+              />
+              <span class="text-xs">Battleship(4)</span>
             </div>
+
             <div
-              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship ship cursor-move flex flex-col items-center justify-center w-32 h-16"
               id="ship-cruiser"
               data-ship="cruiser"
               data-length="3"
               data-orientation="horizontal"
             >
-              <span>Cruiser(3)</span>
+              <img
+                src="/sprites/ships/Cruiser.png"
+                alt="Cruiser"
+                class="h-full w-full object-contain pointer-events-none select-none"
+              />
+              <span class="text-xs">Cruiser(3)</span>
             </div>
+
             <div
-              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship ship cursor-move flex flex-col items-center justify-center w-32 h-16"
               id="ship-submarine"
               data-ship="submarine"
               data-length="3"
               data-orientation="horizontal"
             >
-              <span>Submarine(3)</span>
+              <img
+                src="/sprites/ships/SubMarine.png"
+                alt="SubMarine"
+                class="h-full w-full object-contain pointer-events-none select-none"
+              />
+              <span class="text-xs">Submarine(3)</span>
             </div>
             <div
-              class="draggable-ship cursor-move  bg-amber-500 px-3 py-2 rounded-lg draggable-ship"
+              class="draggable-ship ship cursor-move flex flex-col items-center justify-center w-32 h-16"
               id="ship-destroyer"
               data-ship="destroyer"
               data-length="2"
               data-orientation="horizontal"
             >
-              <span>Destroyer(2)</span>
+              <img
+                src="/sprites/ships/Destroyer.png"
+                alt="Destroyer"
+                class="h-full w-full object-contain pointer-events-none select-none"
+              />
+              <span class="text-xs">Destroyer(2)</span>
             </div>
           </div>
 
@@ -113,7 +144,7 @@
           id="confirm-placement"
           class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg w-full sm:w-auto mx-auto"
         >
-          Listo
+          Done!
         </button>
       </section>
 
@@ -153,7 +184,7 @@
       </section>
     </main>
 
-    <!-- Action Buttons -->
+    <!-- Action Buttons
     <div class="flex justify-center space-x-4">
       <button
         id="new-game"
@@ -166,40 +197,24 @@
       >
         Restart Game
       </button>
-    </div>
+    </div> -->
 
     <!-- Footer -->
     <footer class="mt-12 py-6 bg-gray-800/70 border-t border-gray-700">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex flex-col md:flex-row justify-around items-center">
           <!-- Información del juego -->
           <div class="mb-4 md:mb-0">
             <h3 class="text-xl font-bold text-cyan-300">Battleship Game</h3>
-            <p class="text-gray-400 mt-1">Clásico juego de estrategia naval</p>
           </div>
 
           <!-- Instrucciones -->
           <div class="text-center md:text-right">
-            <h4 class="font-bold text-gray-300">Cómo jugar:</h4>
-            <p class="text-sm text-gray-400">
-              Haz clic en el tablero enemigo para disparar
-            </p>
-            <p class="text-sm text-gray-400">
-              Hunde todos los barcos para ganar
-            </p>
-          </div>
-
-          <!-- Créditos -->
-          <div class="mt-4 md:mt-0">
-            <p class="text-gray-500 text-sm">
-              Desarrollado con ❤️ usando TypeScript & Tailwind CSS
-            </p>
-            <p class="text-gray-500 text-xs mt-1">© 2024 Battleship Game</p>
+            <h4 class="font-bold text-gray-300">How to play?</h4>
+            <p class="text-sm text-gray-400">Place your ships on your Board</p>
+            <p class="text-sm text-gray-400">Sink all the ships to win.</p>
           </div>
         </div>
-
-        <!-- Separador -->
-        <div class="border-t border-gray-700 my-4"></div>
       </div>
     </footer>
 
