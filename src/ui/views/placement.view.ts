@@ -24,12 +24,11 @@ export class PlacementView {
     setupPlacementEvents(this.game, board, shipsContainer);
 
     this.confirmBtn?.addEventListener("click", () => {
-      // Validación de barcos colocados
       const placedShips = getAllPlacedShips();
 
       if (placedShips.size !== 5) {
         alert(
-          `Debes colocar los 5 barcos. Tienes ${placedShips.size} colocados.`
+          `You must place all 5 ships. You have ${placedShips.size} placed.`
         );
         return;
       }

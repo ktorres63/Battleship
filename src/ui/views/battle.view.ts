@@ -8,9 +8,50 @@ export class BattleView {
   playerBoardEl: HTMLElement | null = null;
   computerBoardEl: HTMLElement | null = null;
 
+  //sounds
+  private hitSound: HTMLAudioElement;
+  private missSound: HTMLAudioElement;
+  private soundsLoaded: boolean = false;
+
   constructor(game: Game, viewManager: ViewManager) {
     this.game = game;
     this.viewManager = viewManager;
+
+    this.hitSound = new Audio("/sounds/BangLong.ogg");
+    this.missSound = new Audio("/sounds/watersplash.ogg");
+
+    [this.hitSound, this.missSound].forEach((audio) => {
+      audio.preload = "auto";
+      audio.volume = 1.0;
+    });
+  }
+
+  private unlockSounds() {
+    if (this.soundsLoaded) return;
+
+    [this.hitSound, this.missSound].forEach((audio) => {
+      audio.muted = true;
+      audio
+        .play()
+        .then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.muted = false;
+        })
+        .catch(() => {});
+    });
+
+    this.soundsLoaded = true;
+    console.log("🔓 unlock audio");
+  }
+
+  
+  private playSound(audio: HTMLAudioElement) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.play().catch((err) => {
+      console.warn("block audio :", err);
+    });
   }
 
   init() {
@@ -103,17 +144,19 @@ export class BattleView {
     if (!this.computerBoardEl) return;
 
     this.computerBoardEl.addEventListener("click", (e: MouseEvent) => {
+      this.unlockSounds;
+
       const target = e.target as HTMLElement;
       const cell = target.closest(".cell") as HTMLElement;
 
-      if (!cell) return;
+      if (!cell || !this.computerBoardEl?.contains(cell)) return;
 
       const x = parseInt(cell.dataset.x || "0");
       const y = parseInt(cell.dataset.y || "0");
 
       // Verificar si ya se atacó esa celda
       if (this.game.computer.board.attackStatus[y]?.[x] !== null) {
-        console.log("Ya atacaste esa posición");
+        console.log("Cell already attacked");
         return;
       }
 
@@ -122,6 +165,12 @@ export class BattleView {
         const result = this.game.playerAttack({ x, y });
 
         console.log(`Ataque en (${x}, ${y}): ${result}`);
+
+        if (result === "hit") {
+          this.playSound(this.hitSound);
+        } else if (result === "miss") {
+          this.playSound(this.missSound);
+        }
 
         // Re-renderizar ambos tableros
         this.renderBoards();
@@ -139,15 +188,15 @@ export class BattleView {
 
     if (status === "human_wins") {
       setTimeout(() => {
-        alert("🎉 ¡Ganaste! Has hundido todos los barcos enemigos.");
+        alert("🎉 Victory! You've destroyed the enemy fleet.");
       }, 100);
     } else if (status === "computer_wins") {
       setTimeout(() => {
-        alert("💥 Perdiste. El computador hundió todos tus barcos.");
+        alert("💥 You've been defeated! The computer sank all of your ships.");
       }, 100);
     } else if (status === "draw") {
       setTimeout(() => {
-        alert("🤝 Empate. Ambos perdieron todos sus barcos.");
+        alert("🤝 It's a tie! Both fleets have been destroyed.");
       }, 100);
     }
   }
