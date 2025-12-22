@@ -14,3 +14,7 @@ const viewManager = new ViewManager(game);
 
 viewManager.start();
 
+const newGameBtn = document.getElementById("new-game");
+newGameBtn?.addEventListener("click", () => {
+  location.reload();
+});

@@ -151,64 +151,59 @@
       <!--View 2:  Battle -->
       <section
         id="battle-view"
-        class="flex flex-col md:flex-row gap-10 p-8 max-w-6xl w-full"
+        class="flex flex-col gap-10 p-8 max-w-6xl w-full"
       >
-        <!--Player Board -->
-        <div class="flex-1">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-3xl font-bold text-blue-400">Player</h2>
+        <div class="flex flex-row gap-10 max-w-6xl w-full">
+          <!--Player Board -->
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-3xl font-bold text-blue-400">Player</h2>
+            </div>
+            <div
+              id="player-board"
+              class="grid grid-cols-10 gap-1 bg-blue-900/30 p-4 rounded-xl border-2 border-blue-500 shadow-lg"
+            ></div>
           </div>
-          <div
-            id="player-board"
-            class="grid grid-cols-10 gap-1 bg-blue-900/30 p-4 rounded-xl border-2 border-blue-500 shadow-lg"
-          ></div>
-        </div>
-
-        <!-- Separator -->
-        <div class="hidden md:flex items-center justify-center">
-          <div
-            class="h-64 w-1 bg-linear-to-b from-blue-500 to-purple-500 rounded-full"
-          ></div>
-        </div>
-
-        <!-- Computer Board -->
-        <div class="flex-1">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-3xl font-bold text-red-400">Computer</h2>
+          <!-- Separator -->
+          <div class="hidden md:flex items-center justify-center">
+            <div
+              class="h-64 w-1 bg-linear-to-b from-blue-500 to-purple-500 rounded-full"
+            ></div>
           </div>
-          <div
-            id="computer-board"
-            class="grid grid-cols-10 gap-1 bg-red-900/30 p-4 rounded-xl border-2 border-red-500 shadow-lg"
-          ></div>
+          <!-- Computer Board -->
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-3xl font-bold text-red-400">Computer</h2>
+            </div>
+            <div
+              id="computer-board"
+              class="grid grid-cols-10 gap-1 bg-red-900/30 p-4 rounded-xl border-2 border-red-500 shadow-lg"
+            ></div>
+          </div>
         </div>
+ 
+        <div class="flex justify-center space-x-4 py-6">
+          <button
+            id="new-game"
+            class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold transition duration-300 transform hover:scale-105 shadow-lg"
+          >
+            New Game
+          </button>
+        
+        </div> 
       </section>
     </main>
-
-    <!-- Action Buttons
-    <div class="flex justify-center space-x-4">
-      <button
-        id="new-game"
-        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold transition duration-300 transform hover:scale-105"
-      >
-        New Game
-      </button>
-      <button
-        class="px-6 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg font-bold transition duration-300 transform hover:scale-105"
-      >
-        Restart Game
-      </button>
-    </div> -->
 
     <!-- Footer -->
     <footer class="mt-12 py-6 bg-gray-800/70 border-t border-gray-700">
       <div class="max-w-6xl mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-around items-center">
-          <!-- Información del juego -->
+          <!-- game info -->
           <div class="mb-4 md:mb-0">
             <h3 class="text-xl font-bold text-cyan-300">Battleship Game</h3>
           </div>
 
-          <!-- Instrucciones -->
+          <!-- Instructions -->
           <div class="text-center md:text-right">
             <h4 class="font-bold text-gray-300">How to play?</h4>
             <p class="text-sm text-gray-400">Place your ships on your Board</p>

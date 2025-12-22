@@ -18,6 +18,7 @@ export class ViewManager {
     this.battleView.init();
 
     this.showPlacementView();
+    // this.showBattleView();
   }
   showPlacementView() {
     this.battleView.hide();
