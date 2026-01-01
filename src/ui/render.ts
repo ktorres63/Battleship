@@ -11,6 +11,8 @@ export function renderPlacementBoard(container: HTMLElement, size = 10) {
       cell.dataset.x = String(x);
 
       cell.className = "cell";
+      cell.classList.add("bg-blue-800", "border", "border-blue-600");
+      cell.classList.add("hover:bg-blue-700", "cursor-pointer");
       container.appendChild(cell);
     }
   }
@@ -18,8 +20,7 @@ export function renderPlacementBoard(container: HTMLElement, size = 10) {
 
 export function paintPlacedShip(
   board: HTMLElement,
-  cells: { x: number; y: number }[],
-
+  cells: { x: number; y: number }[]
 ) {
   if (cells.length === 0) return;
 

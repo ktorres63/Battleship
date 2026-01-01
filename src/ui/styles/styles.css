@@ -7,8 +7,6 @@
 .cell {
   @apply w-[clamp(20px,4vw,40px)];
   @apply h-[clamp(20px,4vw,40px)];
-  @apply bg-blue-800 border  border-blue-600;
-  @apply hover:bg-blue-700 cursor-pointer;
   @apply transition-all duration-200;
   @apply rounded-sm;
   @apply flex items-center justify-center;

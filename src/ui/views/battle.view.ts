@@ -45,7 +45,6 @@ export class BattleView {
     console.log("🔓 unlock audio");
   }
 
-  
   private playSound(audio: HTMLAudioElement) {
     audio.pause();
     audio.currentTime = 0;
@@ -59,20 +58,16 @@ export class BattleView {
     this.playerBoardEl = document.getElementById("player-board");
     this.computerBoardEl = document.getElementById("computer-board");
 
-    // Renderizar tableros iniciales
     this.renderBoards();
 
-    // Configurar eventos de ataque en el tablero del computador
     this.setupComputerBoardEvents();
   }
 
   renderBoards() {
     if (!this.playerBoardEl || !this.computerBoardEl) return;
 
-    // Renderizar tablero del jugador (con barcos visibles)
     this.renderPlayerBoard();
 
-    // Renderizar tablero del computador (sin barcos visibles)
     this.renderComputerBoard();
   }
 
@@ -85,6 +80,7 @@ export class BattleView {
       for (let x = 0; x < this.game.player.board.size; x++) {
         const cell = document.createElement("div");
         cell.className = "cell";
+        cell.classList.add("bg-blue-800", "border", "border-blue-600");
         cell.dataset.x = String(x);
         cell.dataset.y = String(y);
 
@@ -97,11 +93,12 @@ export class BattleView {
         // Mostrar ataques recibidos
         const attackStatus = this.game.player.board.attackStatus[y]?.[x];
         if (attackStatus === "hit") {
+          cell.classList.remove("bg-amber-600", "border-amber-700");
           cell.classList.add("bg-red-600", "border-red-700");
+
           cell.innerHTML = '<span class="text-white font-bold">X</span>';
         } else if (attackStatus === "missed") {
           cell.classList.add("bg-gray-600", "border-gray-700");
-          cell.innerHTML = '<span class="text-white">•</span>';
         }
 
         this.playerBoardEl.appendChild(cell);
@@ -118,21 +115,18 @@ export class BattleView {
       for (let x = 0; x < this.game.computer.board.size; x++) {
         const cell = document.createElement("div");
         cell.className = "cell cursor-pointer hover:bg-red-700";
+        cell.classList.add("bg-blue-800", "border", "border-blue-600");
+
         cell.dataset.x = String(x);
         cell.dataset.y = String(y);
-
-        // NO mostramos los barcos del computador (están ocultos)
-        // Solo mostramos los ataques que hemos hecho
 
         const attackStatus = this.game.computer.board.attackStatus[y]?.[x];
         if (attackStatus === "hit") {
           cell.classList.add("bg-red-600", "border-red-700");
           cell.classList.remove("hover:bg-red-700");
-          cell.innerHTML = '<span class="text-white font-bold">X</span>';
         } else if (attackStatus === "missed") {
           cell.classList.add("bg-gray-600", "border-gray-700");
           cell.classList.remove("hover:bg-red-700");
-          cell.innerHTML = '<span class="text-white">•</span>';
         }
 
         this.computerBoardEl.appendChild(cell);
