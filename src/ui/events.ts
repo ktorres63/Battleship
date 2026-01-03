@@ -32,19 +32,16 @@ export function setupPlacementEvents(
   const axisYBtn = document.getElementById("axis-y");
 
   const updateOrientationButtons = () => {
-    if (currentOrientation === "horizontal") {
-      axisXBtn?.classList.add("bg-blue-600", "ring-2", "ring-blue-300");
-      axisXBtn?.classList.remove("bg-blue-500");
-      axisYBtn?.classList.remove("bg-blue-600", "ring-2", "ring-blue-300");
-      axisYBtn?.classList.add("bg-blue-500");
-    } else {
-      axisYBtn?.classList.add("bg-blue-600", "ring-2", "ring-blue-300");
-      axisYBtn?.classList.remove("bg-blue-500");
-      axisXBtn?.classList.remove("bg-blue-600", "ring-2", "ring-blue-300");
-      axisXBtn?.classList.add("bg-blue-500");
-    }
-  };
+    axisXBtn?.setAttribute(
+      "data-active",
+      currentOrientation === "horizontal" ? "true" : "false"
+    );
 
+    axisYBtn?.setAttribute(
+      "data-active",
+      currentOrientation === "vertical" ? "true" : "false"
+    );
+  };
   updateOrientationButtons();
 
   axisXBtn?.addEventListener("click", () => {
@@ -129,7 +126,15 @@ export function setupPlacementEvents(
       const coords = calculateShipCoords(x, y, length, currentOrientation);
 
       if (checkIfCanPlace(coords, boardEl)) {
-        placeShipOnBoard(game, draggedShip, coords, shipName, currentOrientation, boardEl, shipsEl);
+        placeShipOnBoard(
+          game,
+          draggedShip,
+          coords,
+          shipName,
+          currentOrientation,
+          boardEl,
+          shipsEl
+        );
       }
     });
   });
@@ -167,10 +172,7 @@ function calculateShipCoords(
   return coords;
 }
 
-function checkIfCanPlace(
-  coords: Coord[],
-  boardEl: HTMLElement
-): boolean {
+function checkIfCanPlace(coords: Coord[], boardEl: HTMLElement): boolean {
   // Verify limits on board
   for (const coord of coords) {
     if (coord.x < 0 || coord.x >= 10 || coord.y < 0 || coord.y >= 10) {
@@ -301,7 +303,10 @@ function rebuildPlayerBoard(game: Game, boardEl: HTMLElement) {
     }
   }
 
-  console.log("Tablero reconstruido. Barcos totales:", game.player.board.ships.length);
+  console.log(
+    "Tablero reconstruido. Barcos totales:",
+    game.player.board.ships.length
+  );
 }
 
 export function getAllPlacedShips() {

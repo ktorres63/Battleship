@@ -18,6 +18,13 @@
   @apply bg-amber-600 border-amber-700;
 }
 
+button[data-active="true"] {
+  @apply bg-blue-600 ring-2 ring-blue-300;
+}
+
+button[data-active="false"] {
+  @apply bg-gray-500;
+}
 /* Estados de hover durante drag */
 .cell.bg-green-500 {
   @apply bg-green-500;

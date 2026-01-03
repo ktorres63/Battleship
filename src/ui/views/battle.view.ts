@@ -96,7 +96,6 @@ export class BattleView {
           cell.classList.remove("bg-amber-600", "border-amber-700");
           cell.classList.add("bg-red-600", "border-red-700");
 
-          cell.innerHTML = '<span class="text-white font-bold">X</span>';
         } else if (attackStatus === "missed") {
           cell.classList.add("bg-gray-600", "border-gray-700");
         }
