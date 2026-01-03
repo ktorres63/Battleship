@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
-    <script type="module" crossorigin src="/Battleship/assets/index-ClsJ6hGh.js"></script>
-    <link rel="stylesheet" crossorigin href="/Battleship/assets/index-C4l9bVlt.css">
+    <script type="module" crossorigin src="/Battleship/assets/index-CM-pZmzu.js"></script>
+    <link rel="stylesheet" crossorigin href="/Battleship/assets/index-B0quLm2P.css">
   </head>
   <body class="flex flex-col min-h-screen bg-gray-900 text-white pt-5">
     <header class="py-8 flex justify-center">
@@ -38,13 +38,15 @@
         <div class="flex gap-4 justify-around">
           <button
             id="axis-x"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-blue-600"
+            data-active="false"
           >
             X axis
           </button>
           <button
             id="axis-y"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-blue-600"
+            data-active="false"
           >
             Y axis
           </button>
@@ -183,7 +185,7 @@
             ></div>
           </div>
         </div>
- 
+
         <div class="flex justify-center space-x-4 py-6">
           <button
             id="new-game"
@@ -191,8 +193,7 @@
           >
             New Game
           </button>
-        
-        </div> 
+        </div>
       </section>
     </main>
 
